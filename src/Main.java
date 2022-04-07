@@ -4,6 +4,7 @@ import classes.Sex;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -34,10 +35,12 @@ public class Main {
                 .map(Person::getFamily)
                 .collect(Collectors.toList());
 
+
         List<String> workables = persons.stream()
-                        .filter(p -> (p.getSex().equals(Sex.MAN) && p.getAge()<65) || (p.getSex().equals(Sex.WOMAN) && p.getAge()<60))
+                        .filter(p -> (p.getSex().equals(Sex.MAN) && p.getAge()<65) || (p.getSex().equals(Sex.WOMAN) && p.getAge()<60)
+                        && p.getAge()>=18 && p.getEducation().equals(Education.HIGHER))
+                        .sorted(Comparator.comparing(Person::getFamily))
                         .map(Person::getFamily)
                         .collect(Collectors.toList());
-
     }
 }
